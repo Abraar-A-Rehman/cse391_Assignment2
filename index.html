@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE 391: Assignment 2 - JavaScript Programming</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <h1 class="course-title">CSE 391: Programming for the Internet</h1>
+        <p class="course-subtitle">Assignment 2: JavaScript Programming (DOM, Events, Timing &amp; LocalStorage)</p>
+      </div>
+      <nav class="quick-nav" aria-label="Assignment Questions Navigation">
+        <button type="button" class="nav-btn" onclick="document.getElementById('question-1').scrollIntoView({behavior: 'smooth'})">
+          Q1: Fortune Generator (25)
+        </button>
+        <button type="button" class="nav-btn" onclick="document.getElementById('question-2').scrollIntoView({behavior: 'smooth'})">
+          Q2: Stopwatch (35)
+        </button>
+        <button type="button" class="nav-btn" onclick="document.getElementById('question-3').scrollIntoView({behavior: 'smooth'})">
+          Q3: To-Do List (40)
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <main class="main-container">
+
+    <!-- Upper Grid: Question 2 (Stopwatch) & Question 3 (To-Do List) -->
+    <div class="top-widgets-grid">
+
+      <!-- QUESTION 2: STOPWATCH (35 Marks) -->
+      <section id="question-2" class="task-card" aria-labelledby="q2-heading">
+        <div class="card-header">
+          <h2 id="q2-heading" class="card-title">Question 2: Stopwatch</h2>
+          <span class="marks-badge">35 Marks</span>
+        </div>
+        <p class="helper-text">
+          Counts time in multiples of <strong>3 seconds</strong> (3, 6, 9&hellip;), resumes from the last recorded time when stopped early, and automatically stops at <strong>30 seconds</strong>.
+        </p>
+
+        <div class="stopwatch-display-box" role="timer" aria-live="polite">
+          <div>
+            <span id="stopwatch-value" class="stopwatch-time">0</span>
+            <span class="stopwatch-unit">sec</span>
+          </div>
+          <p id="stopwatch-status" class="stopwatch-status">Ready (0 seconds). Increments by 3s up to 30s.</p>
+        </div>
+
+        <div class="progress-track" aria-hidden="true">
+          <div id="stopwatch-progress" class="progress-fill"></div>
+        </div>
+
+        <div class="stopwatch-controls">
+          <button type="button" id="start-btn" class="btn btn-start">Start</button>
+          <button type="button" id="stop-btn" class="btn btn-stop" disabled>Stop</button>
+          <button type="button" id="reset-btn" class="btn btn-reset">Reset</button>
+        </div>
+      </section>
+
+      <!-- QUESTION 3: TO-DO LIST (40 Marks) -->
+      <section id="question-3" class="task-card" aria-labelledby="q3-heading">
+        <div class="card-header">
+          <h2 id="q3-heading" class="card-title">Question 3: To-Do List</h2>
+          <span class="marks-badge">40 Marks</span>
+        </div>
+        <p class="helper-text">
+          Add, complete, and delete tasks. All tasks and completion states are persisted in <code>localStorage</code> across browser refreshes.
+        </p>
+
+        <div class="todo-input-group">
+          <input
+            type="text"
+            id="todo-input"
+            class="todo-input"
+            placeholder="Enter a new task..."
+            aria-label="New task description"
+          >
+          <button type="button" id="add-todo-btn" class="btn btn-add">Add Task</button>
+        </div>
+        <p id="todo-validation-msg" class="validation-msg" role="alert"></p>
+
+        <div class="todo-stats">
+          <span id="todo-total-count">Total Tasks: 0</span>
+          <span id="todo-completed-count">Completed: 0 / 0</span>
+        </div>
+
+        <ul id="todo-list" class="todo-list" aria-label="Task list"></ul>
+      </section>
+
+    </div>
+
+    <!-- QUESTION 1: FORTUNE GENERATOR (25 Marks) - Centered Just Above the Page Footer -->
+    <section id="question-1" class="task-card fortune-section" aria-labelledby="q1-heading">
+      <div class="card-header">
+        <h2 id="q1-heading" class="card-title">Question 1: Fortune Generator (Positioned Above Footer)</h2>
+        <span class="marks-badge">25 Marks</span>
+      </div>
+      <p class="helper-text">
+        Displays a randomly selected fortune from a 12-item array on page load in a centered box just above the footer. Click the 4 buttons beside the box to dynamically customize its font color, background color, border color, and font size/family.
+      </p>
+
+      <!-- Centered Fortune Box + 4 Buttons Beside It -->
+      <div class="fortune-wrapper">
+        <div id="fortune-box" class="fortune-box">
+          <span id="fortune-text">True wisdom comes not from knowledge, but from understanding.</span>
+        </div>
+
+        <div class="fortune-buttons-grid" role="group" aria-label="Fortune box appearance customization buttons">
+          <button
+            type="button"
+            id="swatch-btn-0"
+            class="color-swatch-btn swatch-green"
+            title="Button 1: Emerald Theme / Cycle Font Color"
+            aria-label="Customize style 1"
+          >1</button>
+          <button
+            type="button"
+            id="swatch-btn-1"
+            class="color-swatch-btn swatch-yellow"
+            title="Button 2: Amber Theme / Cycle Background Color"
+            aria-label="Customize style 2"
+          >2</button>
+          <button
+            type="button"
+            id="swatch-btn-2"
+            class="color-swatch-btn swatch-blue"
+            title="Button 3: Ocean Theme / Cycle Border Color"
+            aria-label="Customize style 3"
+          >3</button>
+          <button
+            type="button"
+            id="swatch-btn-3"
+            class="color-swatch-btn swatch-orange"
+            title="Button 4: Terracotta Theme / Cycle Font Size and Family"
+            aria-label="Customize style 4"
+          >4</button>
+        </div>
+      </div>
+
+      <div class="fortune-subcontrols">
+        <span id="fortune-style-status">Active Style: Default Classic (1.15rem)</span>
+        <div class="mode-select-group">
+          <label for="button-mode-select">4-Button Behavior:</label>
+          <select id="button-mode-select" class="mode-select">
+            <option value="theme">Theme Swatches (Each button updates all 4 properties)</option>
+            <option value="individual">Individual Property (Btn 1: Font, 2: Bg, 3: Border, 4: Size/Font)</option>
+          </select>
+          <button type="button" id="new-fortune-btn" class="btn btn-new-fortune">New Random Fortune</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Page Footer with External Citations as Required by Submission Guidelines -->
+  <footer class="site-footer">
+    <p>
+      CSE 391: Programming for the Internet &mdash; Assignment 2 |
+      References:
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank" rel="noopener noreferrer">MDN Web Storage API</a>,
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval" target="_blank" rel="noopener noreferrer">MDN setInterval()</a>,
+      <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">W3C Markup Validator</a>
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

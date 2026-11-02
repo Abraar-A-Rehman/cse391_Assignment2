@@ -1,0 +1,524 @@
+/* ==========================================================================
+   CSE 391: Programming for the Internet - Assignment 2
+   Stylesheet (style.css)
+   Purpose: Provides layout, responsive grid, and high-contrast accessible styling
+            for the Fortune Generator (Q1), Stopwatch (Q2), and To-Do List (Q3).
+   ========================================================================== */
+
+:root {
+  --page-bg: #f4f6f9;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --border-light: #e2e8f0;
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--page-bg);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header & Navigation */
+.site-header {
+  background-color: #0f172a;
+  color: #ffffff;
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.course-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.course-subtitle {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.quick-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.nav-btn:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+/* Main Content Wrapper */
+.main-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 1.75rem auto;
+  padding: 0 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Top Two-Column Grid for Stopwatch (Q2) and To-Do List (Q3) */
+.top-widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.75rem;
+  align-items: start;
+}
+
+/* Shared Card Styling */
+.task-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.marks-badge {
+  background-color: #eff6ff;
+  color: var(--primary);
+  border: 1px solid #bfdbfe;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+}
+
+.helper-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Question 2: Stopwatch Styles
+   ========================================================================== */
+.stopwatch-display-box {
+  background-color: #0f172a;
+  color: #38bdf8;
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  border: 2px solid #1e293b;
+}
+
+.stopwatch-time {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 3.25rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+}
+
+.stopwatch-unit {
+  font-size: 1rem;
+  color: #94a3b8;
+  margin-left: 0.25rem;
+}
+
+.stopwatch-status {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  margin-top: 0.45rem;
+}
+
+/* Progress Bar for 0 to 30 Seconds */
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--primary);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.stopwatch-controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease, background-color 0.2s ease;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-start {
+  background-color: var(--success);
+  color: #ffffff;
+}
+
+.btn-start:hover:not(:disabled) {
+  background-color: #15803d;
+}
+
+.btn-stop {
+  background-color: var(--warning);
+  color: #ffffff;
+}
+
+.btn-stop:hover:not(:disabled) {
+  background-color: #b45309;
+}
+
+.btn-reset {
+  background-color: var(--danger);
+  color: #ffffff;
+}
+
+.btn-reset:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+/* ==========================================================================
+   Question 3: To-Do List Styles
+   ========================================================================== */
+.todo-input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.todo-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.btn-add {
+  background-color: var(--primary);
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.btn-add:hover {
+  background-color: var(--primary-hover);
+}
+
+.validation-msg {
+  font-size: 0.82rem;
+  color: var(--danger);
+  min-height: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.todo-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border-light);
+  margin-bottom: 0.75rem;
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background-color: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.todo-item.completed {
+  background-color: #f1f5f9;
+}
+
+.todo-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  word-break: break-word;
+}
+
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--success);
+}
+
+.todo-text {
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.btn-delete {
+  background-color: #fee2e2;
+  color: var(--danger);
+  border: 1px solid #fecaca;
+  padding: 0.3rem 0.65rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-delete:hover {
+  background-color: var(--danger);
+  color: #ffffff;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Question 1: Fortune Generator Styles (Centered Just Above Page Footer)
+   ========================================================================== */
+.fortune-section {
+  margin-top: auto;
+  width: 100%;
+}
+
+.fortune-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin: 0.75rem auto;
+}
+
+/* Matches the assignment diagram: centered box with distinct border, bg, and font */
+.fortune-box {
+  background-color: #ffe599;
+  border: 3px solid #6aa84f;
+  color: #783f04;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 1.35rem 1.75rem;
+  border-radius: 6px;
+  max-width: 680px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+/* 2x2 Color Button Grid Beside the Fortune Box (matching PDF diagram) */
+.fortune-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 42px);
+  grid-template-rows: repeat(2, 36px);
+  gap: 8px;
+}
+
+.color-swatch-btn {
+  width: 42px;
+  height: 36px;
+  border-radius: 4px;
+  border: 2px solid rgba(15, 23, 42, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.color-swatch-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.color-swatch-btn:focus {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* The 4 Swatch Colors from the Assignment Specification Image */
+.swatch-green {
+  background-color: #6aa84f;
+}
+
+.swatch-yellow {
+  background-color: #f1c232;
+}
+
+.swatch-blue {
+  background-color: #6fa8dc;
+}
+
+.swatch-orange {
+  background-color: #e69138;
+}
+
+.fortune-subcontrols {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--border-light);
+  font-size: 0.83rem;
+  color: var(--text-muted);
+}
+
+.mode-select-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.mode-select {
+  padding: 0.3rem 0.55rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  background-color: #f8fafc;
+  color: var(--text-main);
+}
+
+.btn-new-fortune {
+  background-color: #e2e8f0;
+  color: #1e293b;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.82rem;
+}
+
+.btn-new-fortune:hover {
+  background-color: #cbd5e1;
+}
+
+/* Footer */
+.site-footer {
+  background-color: #0f172a;
+  color: #94a3b8;
+  text-align: center;
+  padding: 1.15rem 1rem;
+  font-size: 0.84rem;
+  margin-top: auto;
+}
+
+.site-footer a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
