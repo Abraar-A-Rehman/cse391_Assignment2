@@ -19,12 +19,6 @@
    - Displays each task in an unordered list (`<ul>`) with a completion checkbox and a `Delete` button.
    - Saves and restores both task descriptions and completion states using `localStorage` (`JSON.stringify` / `JSON.parse`).
 
-## How to Host for Submission Link (GitHub Pages)
-1. Create a new public repository on GitHub (e.g., `cse391-assignment2`).
-2. Upload `index.html`, `style.css`, `script.js`, and `README.md` to the root of the repository.
-3. Go to **Settings > Pages**, select the `main` branch under **Build and deployment**, and click **Save**.
-4. Submit the generated `https://<your-username>.github.io/cse391-assignment2/` URL along with `CSE391_Assignment2_Submission.zip`.
-
 ## External References & Citations
 - Mozilla Developer Network (MDN) — `Window.localStorage`: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 - Mozilla Developer Network (MDN) — `setInterval()` & `clearInterval()`: https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval
