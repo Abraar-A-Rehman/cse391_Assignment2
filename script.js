@@ -80,13 +80,16 @@ const fontStylesCycle = [
 
 let propIndices = { font: 0, bg: 0, border: 0, style: 0 };
 let lastFortuneIndex = -1;
+let currentButtonMode = "theme"; // "theme" or "individual"
 
 // DOM Elements for Question 1
 const fortuneBox = document.getElementById("fortune-box");
 const fortuneText = document.getElementById("fortune-text");
-const fortuneStyleStatus = document.getElementById("fortune-style-status");
-const buttonModeSelect = document.getElementById("button-mode-select");
 const newFortuneBtn = document.getElementById("new-fortune-btn");
+const themeMenuBtn = document.getElementById("theme-menu-btn");
+const themeOptionsMenu = document.getElementById("theme-options-menu");
+const modeOptTheme = document.getElementById("mode-opt-theme");
+const modeOptIndividual = document.getElementById("mode-opt-individual");
 const swatchButtons = [
   document.getElementById("swatch-btn-0"),
   document.getElementById("swatch-btn-1"),
@@ -108,6 +111,27 @@ function displayRandomFortune() {
 }
 
 /**
+ * Sets the 4-button behavior mode ("theme" or "individual") and updates menu checkmarks.
+ * @param {string} mode - "theme" or "individual"
+ */
+function setFortuneButtonMode(mode) {
+  currentButtonMode = mode;
+  if (mode === "theme") {
+    modeOptTheme.classList.add("active");
+    modeOptTheme.textContent = "✓ Theme Swatches (Each button updates all 4 properties)";
+    modeOptIndividual.classList.remove("active");
+    modeOptIndividual.textContent = "Individual Property (Btn 1: Font, 2: Bg, 3: Border, 4: Size/Font)";
+  } else {
+    modeOptIndividual.classList.add("active");
+    modeOptIndividual.textContent = "✓ Individual Property (Btn 1: Font, 2: Bg, 3: Border, 4: Size/Font)";
+    modeOptTheme.classList.remove("active");
+    modeOptTheme.textContent = "Theme Swatches (Each button updates all 4 properties)";
+  }
+  themeOptionsMenu.classList.add("hidden");
+  themeMenuBtn.setAttribute("aria-expanded", "false");
+}
+
+/**
  * Applies appearance changes to the fortune box when one of the 4 buttons is clicked.
  * Supports both:
  *  - "theme" mode (default): each button changes font color, bg color, border color, and font size/family together.
@@ -115,40 +139,29 @@ function displayRandomFortune() {
  * @param {number} buttonIndex - Index (0 to 3) of the clicked button
  */
 function handleFortuneButtonClick(buttonIndex) {
-  const mode = buttonModeSelect ? buttonModeSelect.value : "theme";
-
-  if (mode === "theme") {
+  if (currentButtonMode === "theme") {
     const selectedTheme = fortuneThemes[buttonIndex];
     fortuneBox.style.color = selectedTheme.fontColor;
     fortuneBox.style.backgroundColor = selectedTheme.bgColor;
     fortuneBox.style.borderColor = selectedTheme.borderColor;
     fortuneBox.style.fontSize = selectedTheme.fontSize;
     fortuneBox.style.fontFamily = selectedTheme.fontFamily;
-
-    if (fortuneStyleStatus) {
-      fortuneStyleStatus.textContent =
-        "Active Style: " + selectedTheme.name + " (" + selectedTheme.fontSize + ")";
-    }
   } else {
     // Individual Property Mode: each of the 4 buttons modifies one specific requirement bullet
     if (buttonIndex === 0) {
       propIndices.font = (propIndices.font + 1) % fontColorsCycle.length;
       fortuneBox.style.color = fontColorsCycle[propIndices.font];
-      fortuneStyleStatus.textContent = "Updated: Font Color (" + fontColorsCycle[propIndices.font] + ")";
     } else if (buttonIndex === 1) {
       propIndices.bg = (propIndices.bg + 1) % bgColorsCycle.length;
       fortuneBox.style.backgroundColor = bgColorsCycle[propIndices.bg];
-      fortuneStyleStatus.textContent = "Updated: Background Color (" + bgColorsCycle[propIndices.bg] + ")";
     } else if (buttonIndex === 2) {
       propIndices.border = (propIndices.border + 1) % borderColorsCycle.length;
       fortuneBox.style.borderColor = borderColorsCycle[propIndices.border];
-      fortuneStyleStatus.textContent = "Updated: Border Color (" + borderColorsCycle[propIndices.border] + ")";
     } else if (buttonIndex === 3) {
       propIndices.style = (propIndices.style + 1) % fontStylesCycle.length;
       const nextFont = fontStylesCycle[propIndices.style];
       fortuneBox.style.fontSize = nextFont.size;
       fortuneBox.style.fontFamily = nextFont.family;
-      fortuneStyleStatus.textContent = "Updated: Font Size & Family (" + nextFont.size + ")";
     }
   }
 }
@@ -162,8 +175,33 @@ swatchButtons.forEach(function (btn, index) {
   }
 });
 
+// Dice button on the left of the fortune box rolls a new random fortune
 if (newFortuneBtn) {
   newFortuneBtn.addEventListener("click", displayRandomFortune);
+}
+
+// Theme button toggles the two 4-button behavior options
+if (themeMenuBtn && themeOptionsMenu) {
+  themeMenuBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+    const isHidden = themeOptionsMenu.classList.toggle("hidden");
+    themeMenuBtn.setAttribute("aria-expanded", String(!isHidden));
+  });
+
+  modeOptTheme.addEventListener("click", function () {
+    setFortuneButtonMode("theme");
+  });
+
+  modeOptIndividual.addEventListener("click", function () {
+    setFortuneButtonMode("individual");
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!themeOptionsMenu.contains(event.target) && event.target !== themeMenuBtn) {
+      themeOptionsMenu.classList.add("hidden");
+      themeMenuBtn.setAttribute("aria-expanded", "false");
+    }
+  });
 }
 
 /* ==========================================================================

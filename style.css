@@ -464,44 +464,102 @@ body {
   background-color: #e69138;
 }
 
+/* Dice Button on the left of the Fortune Box */
+.dice-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  border: 2px solid #cbd5e1;
+  background-color: #f8fafc;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.dice-btn:hover {
+  background-color: #eff6ff;
+  border-color: var(--primary);
+  transform: rotate(-12deg) scale(1.08);
+}
+
+.dice-btn:active {
+  transform: rotate(15deg) scale(0.95);
+}
+
 .fortune-subcontrols {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  padding-top: 0.85rem;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
   border-top: 1px dashed var(--border-light);
-  font-size: 0.83rem;
-  color: var(--text-muted);
 }
 
-.mode-select-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+.theme-dropdown-container {
+  position: relative;
+  display: inline-block;
 }
 
-.mode-select {
-  padding: 0.3rem 0.55rem;
+.btn-theme {
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+}
+
+.btn-theme:hover {
+  background-color: var(--primary);
+}
+
+.theme-options-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
   border: 1px solid #cbd5e1;
-  border-radius: 5px;
-  font-size: 0.82rem;
-  background-color: #f8fafc;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  min-width: 340px;
+  z-index: 20;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-options-menu.hidden {
+  display: none;
+}
+
+.theme-option-item {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-light);
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  font-size: 0.83rem;
   color: var(--text-main);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
-.btn-new-fortune {
-  background-color: #e2e8f0;
-  color: #1e293b;
-  padding: 0.4rem 0.85rem;
-  font-size: 0.82rem;
+.theme-option-item:last-child {
+  border-bottom: none;
 }
 
-.btn-new-fortune:hover {
-  background-color: #cbd5e1;
+.theme-option-item:hover {
+  background-color: #f1f5f9;
+}
+
+.theme-option-item.active {
+  background-color: #eff6ff;
+  color: var(--primary);
+  font-weight: 600;
 }
 
 /* Footer */

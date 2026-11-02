@@ -13,17 +13,16 @@
     <div class="header-inner">
       <div>
         <h1 class="course-title">CSE 391: Programming for the Internet</h1>
-        <p class="course-subtitle">Assignment 2: JavaScript Programming (DOM, Events, Timing &amp; LocalStorage)</p>
       </div>
       <nav class="quick-nav" aria-label="Assignment Questions Navigation">
         <button type="button" class="nav-btn" onclick="document.getElementById('question-1').scrollIntoView({behavior: 'smooth'})">
-          Q1: Fortune Generator (25)
+          Fortune Generator
         </button>
         <button type="button" class="nav-btn" onclick="document.getElementById('question-2').scrollIntoView({behavior: 'smooth'})">
-          Q2: Stopwatch (35)
+          Stopwatch
         </button>
         <button type="button" class="nav-btn" onclick="document.getElementById('question-3').scrollIntoView({behavior: 'smooth'})">
-          Q3: To-Do List (40)
+          To-Do List
         </button>
       </nav>
     </div>
@@ -38,8 +37,7 @@
       <!-- QUESTION 2: STOPWATCH (35 Marks) -->
       <section id="question-2" class="task-card" aria-labelledby="q2-heading">
         <div class="card-header">
-          <h2 id="q2-heading" class="card-title">Question 2: Stopwatch</h2>
-          <span class="marks-badge">35 Marks</span>
+          <h2 id="q2-heading" class="card-title">Stopwatch</h2>
         </div>
         <p class="helper-text">
           Counts time in multiples of <strong>3 seconds</strong> (3, 6, 9&hellip;), resumes from the last recorded time when stopped early, and automatically stops at <strong>30 seconds</strong>.
@@ -67,8 +65,7 @@
       <!-- QUESTION 3: TO-DO LIST (40 Marks) -->
       <section id="question-3" class="task-card" aria-labelledby="q3-heading">
         <div class="card-header">
-          <h2 id="q3-heading" class="card-title">Question 3: To-Do List</h2>
-          <span class="marks-badge">40 Marks</span>
+          <h2 id="q3-heading" class="card-title">To-Do List</h2>
         </div>
         <p class="helper-text">
           Add, complete, and delete tasks. All tasks and completion states are persisted in <code>localStorage</code> across browser refreshes.
@@ -96,18 +93,22 @@
 
     </div>
 
-    <!-- QUESTION 1: FORTUNE GENERATOR (25 Marks) - Centered Just Above the Page Footer -->
+    <!-- QUESTION 1: FORTUNE GENERATOR - Centered Just Above the Page Footer -->
     <section id="question-1" class="task-card fortune-section" aria-labelledby="q1-heading">
       <div class="card-header">
-        <h2 id="q1-heading" class="card-title">Question 1: Fortune Generator (Positioned Above Footer)</h2>
-        <span class="marks-badge">25 Marks</span>
+        <h2 id="q1-heading" class="card-title">Fortune Generator</h2>
       </div>
-      <p class="helper-text">
-        Displays a randomly selected fortune from a 12-item array on page load in a centered box just above the footer. Click the 4 buttons beside the box to dynamically customize its font color, background color, border color, and font size/family.
-      </p>
 
-      <!-- Centered Fortune Box + 4 Buttons Beside It -->
+      <!-- Dice Button on Left + Centered Fortune Box + 4 Color Buttons on Right -->
       <div class="fortune-wrapper">
+        <button
+          type="button"
+          id="new-fortune-btn"
+          class="dice-btn"
+          title="Click to roll a new random fortune"
+          aria-label="Roll new random fortune"
+        >&#x1F3B2;</button>
+
         <div id="fortune-box" class="fortune-box">
           <span id="fortune-text">True wisdom comes not from knowledge, but from understanding.</span>
         </div>
@@ -144,30 +145,28 @@
         </div>
       </div>
 
+      <!-- Theme Button that toggles the 2 behavior options when clicked -->
       <div class="fortune-subcontrols">
-        <span id="fortune-style-status">Active Style: Default Classic (1.15rem)</span>
-        <div class="mode-select-group">
-          <label for="button-mode-select">4-Button Behavior:</label>
-          <select id="button-mode-select" class="mode-select">
-            <option value="theme">Theme Swatches (Each button updates all 4 properties)</option>
-            <option value="individual">Individual Property (Btn 1: Font, 2: Bg, 3: Border, 4: Size/Font)</option>
-          </select>
-          <button type="button" id="new-fortune-btn" class="btn btn-new-fortune">New Random Fortune</button>
+        <div class="theme-dropdown-container">
+          <button type="button" id="theme-menu-btn" class="btn btn-theme" aria-expanded="false">
+            Theme &#9662;
+          </button>
+          <div id="theme-options-menu" class="theme-options-menu hidden" role="menu">
+            <button type="button" id="mode-opt-theme" class="theme-option-item active" data-mode="theme" role="menuitem">
+              &#10003; Theme Swatches (Each button updates all 4 properties)
+            </button>
+            <button type="button" id="mode-opt-individual" class="theme-option-item" data-mode="individual" role="menuitem">
+              Individual Property (Btn 1: Font, 2: Bg, 3: Border, 4: Size/Font)
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Page Footer with External Citations as Required by Submission Guidelines -->
   <footer class="site-footer">
-    <p>
-      CSE 391: Programming for the Internet &mdash; Assignment 2 |
-      References:
-      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank" rel="noopener noreferrer">MDN Web Storage API</a>,
-      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval" target="_blank" rel="noopener noreferrer">MDN setInterval()</a>,
-      <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">W3C Markup Validator</a>
-    </p>
+    <p>Copyright @ 23301680</p>
   </footer>
 
   <script src="script.js"></script>
